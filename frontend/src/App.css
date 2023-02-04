@@ -63,6 +63,7 @@ nav a:hover {
 }
 
 .article-list-item p {
+  width: 100%;
   padding-bottom: 32px;
   border-bottom: 2px solid black;
 }
