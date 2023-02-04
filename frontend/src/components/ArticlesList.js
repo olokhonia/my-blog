@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const ArticlesList = ({ articles }) => {
     return (
-        articles?.map((article, key) => (
+        articles.map((article, key) => (
             <Link 
                 className="article-list-item" 
                 to={ `/article/${article.name}` } 

@@ -29,9 +29,14 @@ const AddCommentForm = ({ articleName, setArticleInfo }) => {
                 <input type="text" value={ username } onChange={ (event) => setUsername(event.target.value) } />
             </label>            
             <label>Comment: 
-                <textarea rows="4" cols="50" value={ commentText } onChange={ (event) => setCommentText(event.target.value) } />
+                <textarea 
+                    rows="4" 
+                    cols="50" 
+                    value={ commentText } 
+                    onChange={ (event) => setCommentText(event.target.value) } 
+                />
             </label>
-            <button onClick={() => addComment() }>Add Comment</button>
+            <button onClick={ () => addComment() }>Add Comment</button>
         </div>
     );
 }
