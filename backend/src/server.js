@@ -3,15 +3,17 @@ import bodyParser from 'body-parser';
 import { MongoClient } from 'mongodb';
 import path from 'path';
 
+const LOCAL_MONGODB = 'mongodb://localhost:27017';
+const PORT = 8000;
+
 const app = express();
 
 app.use(express.static(path.join(__dirname, '/build')));
 app.use(bodyParser.json());
 
-
 const withDB = async (operations, res) => {
     try {
-        const client = await MongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true });
+        const client = await MongoClient.connect(LOCAL_MONGODB, { useNewUrlParser: true });
         const db = client.db('my-blog');
 
         await operations(db);
@@ -21,6 +23,13 @@ const withDB = async (operations, res) => {
         res.status(500).send('Error when tried to create/update/retrive data from db', error);
     };
 }
+
+app.get('/api/articles', async (req, res) => {
+    await withDB(async (db) => {
+        const articles = await db.collection('articles').find().toArray();
+        res.status(200).json(articles);
+    }, res);
+});
 
 app.get('/api/articles/:name', async (req, res) => {
     await withDB(async (db) => {
@@ -63,8 +72,8 @@ app.post('/api/articles/:name/add-comment', (req, res) => {
     }, res);
 });
 
-app.get('*', (req, res) => {
+app.get('*', (res) => {
     res.sendFile(path.join(__dirname + '/build/index.html'));
 });
 
-app.listen(8000, () => console.log('Listening port 8000'));
+app.listen(PORT, () => console.log(`Server is up on port ${PORT}`));
