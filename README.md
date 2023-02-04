@@ -1,5 +1,3 @@
-# my-blog
-
 # Project overview
 This is a learning project to get how to create a simple full-stack web application.
 
