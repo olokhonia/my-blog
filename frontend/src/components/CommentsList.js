@@ -13,7 +13,7 @@ const CommentsList = ({ comments }) => {
                                 </div>
                             ))
                     :
-                        <p>There is no any comments yet</p>
+                        <p>There is no any comments yet.</p>
                     }
         </>
     );

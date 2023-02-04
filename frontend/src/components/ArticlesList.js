@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from 'react-router-dom';
 
 const ArticlesList = ({ articles }) => {
+    if (!articles.length) return (<p>There is no any articles yet.</p>);
+
     return (
         articles.map((article, key) => (
             <Link 
